@@ -9,7 +9,7 @@
   <meta name="keywords" content="">
 
   <!-- Favicons -->
-  <link href="assets/img/ass.png" rel="icon">
+  <link href="assets/img/s.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Fonts -->
@@ -135,7 +135,7 @@
 
     <div class="container">
       <div class="copyright text-center ">
-        <p><img src="assets/img/ass.png" alt="Alijon Suvonov" style="width: 30px; height: 30px; border-radius: 50%;"><strong class="px-1 sitename">Alijon Suvonov</strong></p>
+        <p><img src="assets/img/s.png" alt="Alijon Suvonov" style="width: 30px; height: 30px; border-radius: 50%;"><strong class="px-1 sitename">Alijon Suvonov</strong></p>
       </div>
       <div class="social-links d-flex justify-content-center">
         <a href="https://t.me/suvonov_alijon/"><i class="bi bi-telegram"></i></a>
@@ -167,57 +167,59 @@
   <script src="assets/js/main.js"></script>
 
   <!-- Form Handling Script -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const form = document.getElementById("telegramForm");
-      const status = document.getElementById("status");
-      const submitBtn = document.getElementById("submitBtn");
+ <script>
+document.addEventListener("DOMContentLoaded", function() {
+  const form = document.getElementById("telegramForm");
+  const status = document.getElementById("status");
+  const submitBtn = document.getElementById("submitBtn");
 
-      // API manzili (O'zingizning backend manzilingizni qo'ying)
-      const API_URL = "https://your-backend.com/send-message";
+  const API_URL = "http://127.0.0.1:8888";
 
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-        // Tugmani vaqtincha faolsizlantirish
-        submitBtn.disabled = true;
-        status.style.display = "block";
-        status.innerHTML = "Yuborilmoqda...";
-        status.className = "alert alert-info";
+    submitBtn.disabled = true;
+    status.style.display = "block";
+    status.innerHTML = "Yuborilmoqda...";
+    status.className = "alert alert-info";
 
-        const data = {
-          name: form.name.value,
-          email: form.email.value,
-          subject: form.subject.value,
-          message: form.message.value
-        };
+    const data = {
+      name: form.name.value,
+      email: form.email.value,
+      subject: form.subject.value,
+      message: form.message.value
+    };
 
-        try {
-          const res = await fetch(API_URL, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-          });
-
-          if (res.ok) {
-            status.innerHTML = "✅ Xabar muvaffaqiyatli yuborildi!";
-            status.className = "alert alert-success";
-            form.reset();
-          } else {
-            status.innerHTML = "❌ Xatolik yuz berdi! (Server xatosi)";
-            status.className = "alert alert-danger";
-          }
-        } catch (err) {
-          status.innerHTML = "Hozirda ma'lumotlarni yuborish ishlamayapti. Xatolik uchun usur surayman!";
-          status.className = "alert alert-danger";
-        } finally {
-          submitBtn.disabled = false;
-        }
+    try {
+      const res = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
       });
-    });
-  </script>
+
+      const result = await res.json();
+
+      if (res.ok) {
+        status.innerHTML = "✅ Xabar yuborildi!";
+        status.className = "alert alert-success";
+        form.reset();
+      } else {
+        status.innerHTML = "❌ Xatolik: " + JSON.stringify(result);
+        status.className = "alert alert-danger";
+      }
+
+    } catch (err) {
+      status.innerHTML = "❌ Serverga ulanishda xatolik!";
+      status.className = "alert alert-danger";
+      console.log(err);
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+});
+</script>
 
 </body>
 </html>
