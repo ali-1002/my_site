@@ -63,7 +63,7 @@ Repositoryni klon qiling:
 Клонируйте репозиторий:
 
 ```bash
-git clone https://github.com/ali-1002/portfolio.git
+git clone https://github.com/ali-1002/my_site.git
 ```
 
 Open the project folder:
@@ -71,7 +71,7 @@ Loyiha papkasiga o'ting:
 Перейдите в папку проекта:
 
 ```bash
-cd portfolio
+cd my_site
 ```
 
 Open `index.html` in your browser.
