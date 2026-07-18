@@ -211,16 +211,16 @@ document.addEventListener("DOMContentLoaded", function() {
       const result = await res.json();
 
       if (res.ok) {
-        status.innerHTML = "✅ Xabar yuborildi!";
+        status.innerHTML = "✅ Сообщение отправлено!";
         status.className = "alert alert-success";
         form.reset();
       } else {
-        status.innerHTML = "❌ Xatolik: " + JSON.stringify(result);
+        status.innerHTML = "❌ Ошибка: " + JSON.stringify(result);
         status.className = "alert alert-danger";
       }
 
     } catch (err) {
-      status.innerHTML = "❌ Serverga ulanishda xatolik!";
+      status.innerHTML = "❌ Ошибка подключения к серверу!";
       status.className = "alert alert-danger";
       console.log(err);
     } finally {

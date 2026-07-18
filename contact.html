@@ -211,16 +211,16 @@ document.addEventListener("DOMContentLoaded", function() {
       const result = await res.json();
 
       if (res.ok) {
-        status.innerHTML = "✅ Xabar yuborildi!";
+        status.innerHTML = "✅ Message sent!";
         status.className = "alert alert-success";
         form.reset();
       } else {
-        status.innerHTML = "❌ Xatolik: " + JSON.stringify(result);
+        status.innerHTML = "❌ Error: " + JSON.stringify(result);
         status.className = "alert alert-danger";
       }
 
     } catch (err) {
-      status.innerHTML = "❌ Serverga ulanishda xatolik!";
+      status.innerHTML = "❌ Error connecting to the server!";
       status.className = "alert alert-danger";
       console.log(err);
     } finally {
