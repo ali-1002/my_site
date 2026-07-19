@@ -184,6 +184,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
   const API_URL = "https://my-site-backend-ap80.onrender.com/post";
 
+  function hideStatus() {
+    setTimeout(() => {
+      status.style.display = "none";
+      status.innerHTML = "";
+      status.className = "";
+    }, 2000);
+  }
+
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -219,10 +227,14 @@ document.addEventListener("DOMContentLoaded", function() {
         status.className = "alert alert-danger";
       }
 
+      hideStatus();
+
     } catch (err) {
       status.innerHTML = "❌ Error connecting to the server!";
       status.className = "alert alert-danger";
       console.log(err);
+
+      hideStatus();
     } finally {
       submitBtn.disabled = false;
     }
