@@ -219,18 +219,18 @@ document.addEventListener("DOMContentLoaded", function() {
       const result = await res.json();
 
       if (res.ok) {
-        status.innerHTML = "✅ Message sent!";
+        status.innerHTML = "✅ Your message has been sent successfully";
         status.className = "alert alert-success";
         form.reset();
       } else {
-        status.innerHTML = "❌ Error: " + JSON.stringify(result);
+        status.innerHTML = "❌ An error occurred while sending your message. Please try again. " + JSON.stringify(result);
         status.className = "alert alert-danger";
       }
 
       hideStatus();
 
     } catch (err) {
-      status.innerHTML = "❌ Error connecting to the server!";
+      status.innerHTML = "🌐 Could not connect to the server.";
       status.className = "alert alert-danger";
       console.log(err);
 

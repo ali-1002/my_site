@@ -184,12 +184,20 @@ document.addEventListener("DOMContentLoaded", function() {
 
   const API_URL = "https://my-site-backend-ap80.onrender.com/post";
 
+  function hideStatus() {
+    setTimeout(() => {
+      status.style.display = "none";
+      status.innerHTML = "";
+      status.className = "";
+    }, 2000);
+  }
+
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     submitBtn.disabled = true;
     status.style.display = "block";
-    status.innerHTML = "Yuborilmoqda...";
+    status.innerHTML = "⏳ Ваше сообщение отправляется...";
     status.className = "alert alert-info";
 
     const data = {
@@ -211,24 +219,29 @@ document.addEventListener("DOMContentLoaded", function() {
       const result = await res.json();
 
       if (res.ok) {
-        status.innerHTML = "✅ Сообщение отправлено!";
+        status.innerHTML = "✅ Ваше сообщение успешно отправлено";
         status.className = "alert alert-success";
         form.reset();
       } else {
-        status.innerHTML = "❌ Ошибка: " + JSON.stringify(result);
+        status.innerHTML = "❌ При отправке сообщения произошла ошибка. Пожалуйста, попробуйте еще раз." + JSON.stringify(result);
         status.className = "alert alert-danger";
       }
 
+      hideStatus();
+
     } catch (err) {
-      status.innerHTML = "❌ Ошибка подключения к серверу!";
+      status.innerHTML = "🌐 Не удалось подключиться к серверу.";
       status.className = "alert alert-danger";
       console.log(err);
+
+      hideStatus();
     } finally {
       submitBtn.disabled = false;
     }
   });
 });
 </script>
+
 
 </body>
 </html>
